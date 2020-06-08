@@ -1,0 +1,23 @@
+1 - O preço do produto deve ser maior ou igual a 0
+2 - A foto do produto deve começar com "static/kazumaStore/images/"
+3 - As classes só pode ser
+	a - "card text-center anime"
+	b - "card text-center figure"
+
+Dados para testar o cadastro:
+
+Nome: Bell Fine KonoSuba: Kazuma 1: 8 Scale PVC Figure
+
+Descrição: From Bellfine! From Konosuba 2 comes a 1/8 scale figure of Kazuma, the former hikikomori (shut-in) turned adventurer. The characteristic mantle and other details of his outfit are faithfully recreated. In addition to the face part with a standard facial expression there is an alternate one with a "kuzuma face" And the panties he stole with his thieving skill "steal" As an optional part so you can display the figure as you like. Which to do you prefer, Kazuma the reliable protagonist, or Kazuma the foul sneak? Add this figure to your collection and enjoy!
+
+Foto: static/kazumaStore/images/kazumaFigure.jpg
+
+Classe: card text-center figure
+
+Preço: 755.33
+
+
+4- Só podem ser feitas buscas pelo nome do produto
+5- Paginação está para exibir apenas 1 por página, dado que só tem 2 produtos cadastrados
+	a - Depois de se cadastrar mais produtos, pode-se alterar em produtos/views.py/paginacao
+6- Dado o funcionamento da diferente da pagina de busca, decidi não implementar a páginação lá, não fez sentido para mim

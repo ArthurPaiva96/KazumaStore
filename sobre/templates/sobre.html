@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+   <div class="container my-3">
+      <h1 class="text-center mb-4" style="color:#FF1493">Hai hai, Kazuma-desu</h1>
+      <h2 class="text-center text-warning mb-5">Kazuma-dayo</h2>
+
+      <hr>
+        {% for quote in quotes %}
+
+      <blockquote class="blockquote text-center mb-5">
+
+         <p class="mb-0">{{ quote.texto }}</p>
+
+         <footer class="{{ quote.classe }}" style="{{ quote.estilo }}">Satou Kazuma</footer>
+
+      </blockquote>
+
+    {% endfor %}
+
+   </div>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <div style="text-align: center" class="mt-2 mb-1">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#formularioCadastroProduto"
+                    aria-expanded="True" aria-controls="collapseExample">Cadastrar um produto</button>
+            <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#formularioAlterarProduto"
+                    aria-expanded="True" aria-controls="collapseExample">Alterar um produto</button>
+            <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#formularioExcluirProduto"
+                    aria-expanded="True" aria-controls="collapseExample">Excluir um produto</button>
+        </div>
+    </div>
+
+    <form id="formularioCadastroProduto" action="{% url 'admProdutosCadastrar' %}#navbar" method="post" class="collapse in show border rounded py-3 px-3 mt-2 container mt-1 mb-3" style="border-color: #FF1493 !important;">
+
+        {% include 'partials/formularioCadastrarProduto.html' %}
+
+    </form>
+
+    {% include 'partials/errosFormulario.html' %}
+
+    <div class="container mb-2 collapse {{ collapse.1 }}" id="formularioAlterarProduto">
+        {% include 'partials/buscaAlterar.html' %}
+
+        {% for produto in produtos %}
+
+            {% include 'partials/formularioAlterarProduto.html' %}
+
+        {% endfor %}
+
+    {% include 'partials/paginacao.html' with idTag="formularioAlterarProduto"%}
+
+
+    </div>
+
+    <div class="container mb-2 collapse {{ collapse.2 }}" id="formularioExcluirProduto">
+        {% include 'partials/buscaExcluir.html' %}
+
+        {% for produto in produtos %}
+            {% include 'partials/formularioExcluirProduto.html' %}
+        {% endfor %}
+
+        {% include 'partials/paginacao.html' with idTag="formularioExcluirProduto" %}
+    </div>
+
+{% endblock %}

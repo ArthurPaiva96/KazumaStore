@@ -1,0 +1,17 @@
+{% load static %}
+
+{% if produtos.has_previous %}
+    <a name="teste" href="?pagina=1&idTag={{ idTag }}#{{ idTag }}"><<</a>
+    <a href="?pagina={{ produtos.previous_page_number }}&idTag={{ idTag }}#{{ idTag }}"><</a>
+{% endif %}
+{% for pagina in produtos.paginator.page_range %}
+    {% if produtos.number == pagina %}
+        <strong>{{pagina}}</strong>
+    {% elif pagina > produtos.number|add:'-3' and pagina < produtos.number|add:'3' %}
+        {{ pagina }}
+    {% endif %}
+{% endfor %}
+{% if produtos.has_next %}
+    <a href="?pagina={{ produtos.next_page_number }}&idTag={{ idTag }}#{{ idTag }}">></a>
+    <a href="?pagina={{ produtos.paginator.num_pages }}&idTag={{ idTag }}#{{ idTag }}">>></a>
+{% endif %}

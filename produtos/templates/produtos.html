@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="container mb-5">
+
+        <div class="mt-1">
+            <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#formularioCadastroProduto"
+                    aria-expanded="false" aria-controls="collapseExample" style="float: right;">
+                Cadastrar um novo produto Jquery
+            </button>
+            <a class="btn btn-primary btn-sm" href="{% url 'admProdutosCadastrar' %}#navbar" role="button" style="float:left">Administração Produtos</a>
+        </div>
+        <br>
+        <form id="formularioCadastroProduto" class="collapse border border-primary rounded py-3 px-3 mt-2">
+            <div class="form-group">
+                <label for="adicionaProdutoNome">Nome do Produto</label>
+                <input type="text" class="form-control" id="adicionaProdutoNome"
+                       placeholder="Digite o nome do produto a ser adicionado">
+            </div>
+
+            <div class="form-group">
+                <label for="adicionaDescricao">Descrição Produto</label>
+                <textarea class="form-control" id="adicionaDescricao" placeholder="Digite a descrição do produto"
+                          rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="tipoProdutoAnime">Tipo do Produto:</label>
+                <div id="tipoProdutoAnime" class="form-check form-check-inline text-right ml-5">
+                    <input class="form-check-input" name="opcaoTipoProduto" type="radio" id="animeOpcao">
+                    <label class="form-check-label" for="animeOpcao">Anime</label>
+                </div>
+                <div id="tipoProdutoFigure" class="form-check form-check-inline">
+                    <input class="form-check-input" name="opcaoTipoProduto" type="radio" id="figureOpcao">
+                    <label class="form-check-label" for="figureOpcao">Figure</label>
+                </div>
+                <div id="tipoProdutoOutro" class="form-check form-check-inline">
+                    <input class="form-check-input" name="opcaoTipoProduto" type="radio" id="outroOpcao">
+                    <label class="form-check-label" for="outroOpcao">Outro</label>
+                </div>
+
+                <br>
+
+                <label for="idiomaProdutoPortugues">Idiomas disponíveis:</label>
+                <div id="idiomaProdutoPortugues" class="form-check form-check-inline text-right ml-4">
+                    <input class="form-check-input" name="opcaoIdiomaProduto" type="checkbox" id="portuguesOpcao">
+                    <label class="form-check-label" for="portuguesOpcao">Português</label>
+                </div>
+                <div id="idiomaProdutoJapones" class="form-check form-check-inline">
+                    <input class="form-check-input" name="opcaoIdiomaProduto" type="checkbox" id="japonesOpcao">
+                    <label class="form-check-label" for="japonesOpcao">Japonês</label>
+                </div>
+                <div id="idiomaProdutoIngles" class="form-check form-check-inline">
+                    <input class="form-check-input" name="opcaoIdiomaProduto" type="checkbox" id="inglesOpcao">
+                    <label class="form-check-label" for="inglesOpcao">Inglês</label>
+                </div>
+            </div>
+
+            <div class="form-row align-items-center">
+                <label for="precoProdutoCadastrado" class="mr-2">Preço do produto: </label>
+                <input id="precoProdutoCadastrado" class="form-control" type="number" style="width: 100px;">
+            </div>
+
+            <div class="form-group">
+                <label for="comboboxObra">Selecione a obra a qual pertence o produto</label>
+                <select class="form-control" id="comboboxObra">
+                    <option>Kono subarishi sekai ni shukufuku wo</option>
+                    <option>Hataage! Kemono Michi</option>
+                </select>
+            </div>
+
+            <div class="text-right">
+                <button id="botaoCadastrarNovoProduto" type="button" class="btn btn-primary">Cadastrar</button>
+            </div>
+        </form>
+
+
+    </div>
+
+    <div id="inicioProdutos" class="container my-3">
+        <div id="rowProdutos" class="row">
+
+
+            {% for produto in produtos %}
+                <div class="col-12 mb-3">
+                    <div class="{{produto.classe}}">
+
+                        <h5 class="card-header">{{produto.nome}}</h5>
+
+                        <div class="card-body">
+
+                            <img class="img-fluid" src="{{ produto.foto }}" style="height: 300px; float:left;">
+
+                            <p class="card-text mb-4">{{produto.descricao}}</p>
+
+                            <h3 class="text-center">R${{produto.preco}}</h3>
+
+                            <form action="{% url 'comprar' produto.id%}#navbar" method="post">
+                                {% csrf_token %}
+                                <button type="submit"  class="btn btn-primary" style="float: right;">Comprar</button>
+
+                                <input required name="quantidade" class="form-control mr-2"
+                                       type="number" min="1" style="width: 70px; float:right;" value="1">
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+
+{% endblock %}

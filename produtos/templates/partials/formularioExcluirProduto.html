@@ -1,0 +1,11 @@
+{% load static %}
+
+<div class="border rounded py-3 px-3 mt-2 container mt-1 mb-3 card" style="border-color: brown !important;">
+    <p><b>Nome: </b>{{ produto.nome }}</p>
+    <p><b>Descrição: </b>{{ produto.descricao }}</p>
+    <p><b>Preço: </b>{{ produto.preco }}</p>
+    <form action="{% url 'admProdutosDeletar' produto.id %}#navbar" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn-block">Excluir</button>
+    </form>
+</div>

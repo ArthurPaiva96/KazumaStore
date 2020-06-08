@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="{% static 'kazumaStore/css/bootstrap.css' %}" >
+    <link rel="stylesheet" type="text/css" href="{% static 'kazumaStore/css/all.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'kazumaStore/css/styles.css' %}" />
+   <title>Kazuma Store</title>
+</head>
+
+<body>
+   <div id="logo-container">
+      <img src="{% static 'kazumaStore/images/kazumaStore.png' %}" class="img-fluid">
+   </div>
+
+
+   <nav id="navbar" class="navbar navbar-expand-md navbar-light bg-light">
+      <a class="navbar-brand" href="#">Kazuma Store</a>
+
+      <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarMenu"
+         aria-controls="navbarMenu" aria-expanded="false" aria-label="Botão de navegação">
+         <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarMenu">
+         <ul class="navbar-nav mr-auto">
+            <li class="nav-item active ">
+               <a class="nav-link font-weight-bold " href="{% url '' %}#navbar" style="color: 	#FF1493;">Produtos</a>
+            </li>
+            <li class="nav-item active">
+               <a class="nav-link text-warning font-weight-bold " href="{% url 'proximosLancamentos' %}#navbar">Próximos
+                  Lançamentos</a>
+            </li>
+
+            <li class="nav-item active">
+               <a class="nav-link font-weight-bold" href="{% url 'sobre' %}#navbar" style="color: brown;">Sobre</a>
+            </li>
+
+            <li class="nav-item active">
+               <a class="nav-link font-weight-bold" href="{% url 'faq' %}#navbar" style="color: #FF1493;">FAQ</a>
+            </li>
+
+             <li class="nav-item active">
+               <a class="nav-link font-weight-bold text-warning" href="{% url 'carrinho' %}#navbar">Carrinho</a>
+            </li>
+
+         </ul>
+
+      </div>
+   </nav>
+{% block content %}
+{% endblock %}
+   <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+      <div class="container">
+         <div class='row'>
+            <div class='col-3'>
+               <h5> <a class="text-white-50" href="{% url '' %}#navbar">Produtos</a></h5>
+            </div>
+            <div class='col-3'>
+               <h5> <a class="text-white-50" href="{% url 'proximosLancamentos' %}#navbar">Próximos Lançamentos</a></h5>
+            </div>
+            <div class='col-3'>
+               <h5><a class="text-white-50" href="{% url 'sobre' %}#navbar">Sobre</a></h5>
+            </div>
+
+            <div class='col-3'>
+               <h5>Endereço</h5>
+                  <ul class="list-inline">
+                     <li>
+                        Próximo a loja da Wiz na
+                     </li>
+                     <li>
+                        Cidade de Axel,
+                     </li>
+                     <li>
+                        Belzerg
+                     </li>
+                  </ul>
+            </div>
+         </div>
+      </div>
+      <hr>
+      <div class="container text-center">
+         <small>Copyright &copy; Studio Deen, Natsume Akatsuki, Kurone Mishima. Todos os direitos reservados.</small>
+      </div>
+   </footer>
+
+
+   <script src="{% static 'kazumaStore/js/jquery-3.3.1.js' %}"></script>
+   <script src="{% static 'kazumaStore/js/popper.js' %}"></script>
+   <script src="{% static 'kazumaStore/js/bootstrap.js' %}"></script>
+   <script src="{% static 'kazumaStore/js/script.js' %}"></script>
+</body>
+
+</html>

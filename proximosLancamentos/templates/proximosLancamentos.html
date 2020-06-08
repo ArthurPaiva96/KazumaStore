@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+   <div class="container my-3">
+      <div class="row">
+
+        {% for proximoLancamento in proximosLancamentos %}
+
+         <div class="col-12 mb-3">
+            <div class="card text-left">
+               <h5 class="card-header text-center">{{ proximoLancamento.nome }}</h5>
+               <div class="card-body">
+                   {% with proximoLancamento.imagem as image %}
+                  <img class="img-fluid" src="{% static image %}" style="height: 300px; float:left;">
+                    {% endwith %}
+
+
+                  <div class="card">
+                     <button class="btn btn-primary ml-1" type="button" data-toggle="collapse"
+                        data-target="#sinopse{{ forloop.counter }}" aria-expanded="false" aria-controls="collapseExample">
+                        Synopsis
+                     </button>
+                     <div id="sinopse{{ forloop.counter }}" class="card-body collapse border border-primary rounded ml-2">
+
+                        <span class="card-text">{{ proximoLancamento.sinopse }}</span>
+                     </div>
+                  </div>
+
+                  <p class="card-text" style="white-space: nowrap">
+                     <ul class='list-inline d-table'>
+
+                        <li><b class="text-primary ml-2">Aired: </b> {{ proximoLancamento.dataInicioFinal }}</li>
+                        <li><b class="text-primary ml-2">Premiered: </b>{{ proximoLancamento.temporadaDeLancamento }}</li>
+                        <li><b class="text-primary ml-2">Broadcast: </b>{{ proximoLancamento.diaHoraDeExibicao }}</li>
+                        <li><b class="text-primary ml-2">Producers: </b>{{ proximoLancamento.produtores }}</li>
+                        <li><b class="text-primary ml-2">Licensors: </b>{{ proximoLancamento.licenciadores }}</li>
+                        <li><b class="text-primary ml-2">Studios: </b>{{ proximoLancamento.estudio }}</li>
+                        <li><b class="text-primary ml-2">Source: </b>{{ proximoLancamento.midiaOriginal }}</li>
+                        <li><b class="text-primary ml-2">Genres: </b>{{ proximoLancamento.generos }}</li>
+                     </ul>
+                  </p>
+
+               </div>
+            </div>
+         </div>
+
+      {% endfor %}
+
+      </div>
+   </div>
+
+ {% endblock %}

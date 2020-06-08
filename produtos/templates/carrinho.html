@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container mt-2">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+
+                <th scope="col">Produto</th>
+                <th scope="col">Preço Unitário</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Preço Total</th>
+                <th scope="col">Excluir item</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for item, precosTotais in itensCarrinho %}
+                <tr>
+                    <td>{{ item.produto.nome }}</td>
+                    <td>R$ {{ item.produto.preco }}</td>
+                    <td>
+                        <form action="{% url 'alterarQuantidadeAjax' %}" method="POST" novalidate produtoId="{{ item.produto.id }}">
+                            <input class="form-control" type="number" min="1" style="width: 70px; margin-left: 35%;" value="{{item.quantidade}}">
+                            </br>
+                            <span id="botaoAlterarQuantidade{{ forloop.counter }}" class="botaoAlterar text-warning" name="quantidade"
+                                  style="margin-left: 35%;cursor:pointer;">alterar</span>
+                        </form>
+                    </td>
+                    <td>R$ {{ precosTotais}}</td>
+                    <td>
+                        <form action="{% url 'deletarProdutoDoCarrinhoAjax' %}" method="POST" novalidade produtoId="{{ item.produto.id }}">
+                            <span class="botaoDeletar" style="color:brown;cursor: pointer">
+                                <i class="fas fa-trash"></i> Excluir do carrinho
+                            </span>
+                        </form>
+                    </td>
+
+                </tr>
+            {% endfor %}
+            <tr class="table-borderless">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <th class="text-right">Preço Total do Carrinho</th>
+            </tr>
+            <tr class="table-borderless">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-right">R$ {{ precoTotalCarrinho }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="{% static 'kazumaStore/js/jquery-3.3.1.js' %}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $('.botaoAlterar').click(function() {
+            let form = $(this).parent();
+            let url = form.attr('action');
+            let quantidade = form.find('input').val();
+            let produtoId = form.attr('produtoId');
+            objetoPost = {
+                produtoId : produtoId,
+                quantidade: quantidade,
+                csrfmiddlewaretoken:'{{csrf_token}}'
+            };
+            $.ajax({
+                type:"POST",
+                url: url,
+                data: objetoPost,
+                success: recarregarCarrinho()
+            });
+            return false
+        });
+
+        $('.botaoDeletar').click(function () {
+            let form = $(this).parent();
+            let url = form.attr('action');
+            let produtoId = form.attr('produtoId');
+            objetoPost = {
+                produtoId : produtoId,
+                csrfmiddlewaretoken:'{{csrf_token}}'
+            };
+            $.ajax({
+                type:"POST",
+                url: url,
+                data: objetoPost,
+                success: recarregarCarrinho()
+            });
+            return false
+        });
+
+        function recarregarCarrinho() {
+            if(!window.location.pathname.includes('carrinho')){
+                location.href = '/carrinho#navbar';
+                return
+            }
+            location.reload()
+        }
+    </script>
+{% endblock %}
